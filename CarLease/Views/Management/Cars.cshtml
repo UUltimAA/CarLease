@@ -1,0 +1,36 @@
+@model IList<CarLease.Models.Cars>
+
+@{
+    ViewBag.Title = "Cars";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cars</h2>
+
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <td>License Number</td>
+            <td>Kilometers done</td>
+            <td>Good for rental</td>
+            <td>Picture</td>
+            <td>Manage</td>
+        </tr>
+    </thead>
+    <tbody>
+        <a href="/management/caredit" class="btn btn-default">Add Car</a>
+        @foreach (CarLease.Models.Cars car in Model)
+        {
+            <tr>
+                <td>@car.LicenseNumber</td>
+                <td>@car.CurrentKM</td>
+                <td><input type="checkbox" name="car.GoodForRental" @(car.GoodForRental == "y" ? "checked" : "") value="true" /></td>
+                <td>@car.Picture</td>
+                <td>
+                    <a href="/management/caredit?carId=@car.Id" class="btn btn-regular">Modify</a>
+                    <a href="/management/deletecar?carId=@car.Id" class="btn btn-regular">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

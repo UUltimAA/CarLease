@@ -1,0 +1,35 @@
+@model CarLease.Models.CarTypes
+
+@{
+    ViewBag.Title = "CarTypeEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CarTypeEdit</h2>
+
+<form name="cartypeEdit" method="post" action="/management/cartypeEdit">
+
+    <label for="CarType.Id"></label>
+    <input type="text" name="CarType.Id"  value="@Model.Id" />
+
+    <label for="CarType.Brand">Brand</label>
+    <input type="text" name="CarType.Brand" value="@Model.Brand">
+
+    <label for="CarType.Model">Model</label>
+    <input type="text" name="CarType.Model" value="@Model.Model">
+
+    <label for="CarType.DailyCost">Daily Cost</label>
+    <input type="text" name="CarType.DailyCost" value="@Model.DailyCost">
+
+   <label for="CarType.DailyLateCost">Daily Late Cost</label>
+    <input type="text" name="CarType.DailyLateCost" value="@Model.DailyLateCost">
+
+    <label for="CarType.Gear">Gear</label>
+    @*<input type="text" name="CarType.Gear" value="@Model.Gear">*@
+    <select name="CarType.Gear">
+        <option value="A" @(Model.Gear == "A" ? "selected" : "")>Automatic</option>
+        <option value="M" @(Model.Gear == "M" ? "selected" : "")>Manual</option>
+    </select>
+
+    <button type="submit">Update/Add</button>
+</form>

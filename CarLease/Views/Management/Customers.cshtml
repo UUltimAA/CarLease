@@ -1,0 +1,41 @@
+@model IList<CarLease.Models.Customers>
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <td>User Name</td>
+            <td>Full Name</td>
+            <td>Gender</td>
+            <td>Birth Date</td>
+            <td>Email</td>
+            <td>Password</td>
+            <td>Picture</td>
+</tr>
+    </thead>
+    <tbody>
+        <a href="/management/customerEdit" class="btn btn-default">Add Customer</a>
+        @foreach (CarLease.Models.Customers customer in Model)
+        {
+            <tr>
+                <td>@customer.UserName</td>
+                <td>@customer.FullName</td>
+                <td>@customer.Gender</td>
+                <td>@customer.Birthdate</td>
+                <td>@customer.Email</td>
+                <td>@customer.Password</td>
+                <td>@customer.Picture</td>
+                <td>
+                    <a href="/management/customerEdit?customerId=@customer.Id" class="btn btn-regular">Modify</a>
+                    <a href="/management/deleteCustomer?customerId=@customer.Id" class="btn btn-regular">Delete</a>
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

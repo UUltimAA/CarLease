@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Return";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Return</h2>
+
+<form action="/lease/return" method="post">
+    <div>
+        <span>Enter a Car Licsense number to return</span>
+        <input type="number" name="number"/>
+        <button type="submit">Search car</button>
+    </div>
+</form>

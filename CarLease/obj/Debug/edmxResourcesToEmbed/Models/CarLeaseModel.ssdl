@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OYLeasingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'OYLeasing.dbo.DepotDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DepotDetails">
+    <Key>
+      <PropertyRef Name="DepotAddress" />
+      <PropertyRef Name="DepotCoordinates" />
+      <PropertyRef Name="DepotName" />
+    </Key>
+    <Property Name="DepotAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DepotCoordinates" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DepotName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberFullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MemberID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="BirthdayDate" Type="timestamp" StoreGeneratedPattern="Computed" />
+    <Property Name="Sex" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Picture" Type="xml" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'OYLeasing.dbo.Vehicle' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Vehicle">
+          <Property Name="VehicleMaker" Type="nvarchar" MaxLength="50" />
+          <Property Name="VehicleModel" Type="nvarchar" MaxLength="50" />
+          <Property Name="VehicleCostPerDay" Type="money" />
+          <Property Name="VehicleDayFineCost" Type="money" />
+          <Property Name="VehicleGear" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+  <EntityType Name="VehicleDetails">
+    <Key>
+      <PropertyRef Name="Vehicle" />
+    </Key>
+    <Property Name="Vehicle" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CurrentKMPassed" Type="int" Nullable="false" />
+    <Property Name="Picture" Type="image" />
+    <Property Name="GoodForRental" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="VehicleRegistrationNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DepotDetails" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'OYLeasing.dbo.VehicleRentalDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VehicleRentalDetails">
+    <Key>
+      <PropertyRef Name="RentalStartDate" />
+      <PropertyRef Name="RentalEndDate" />
+      <PropertyRef Name="VehicleReturnedDate" />
+      <PropertyRef Name="Member" />
+      <PropertyRef Name="Vehicle" />
+    </Key>
+    <Property Name="RentalStartDate" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="RentalEndDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="VehicleReturnedDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="Member" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Vehicle" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="OYLeasingModelStoreContainer">
+    <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleDetails" EntityType="Self.VehicleDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DepotDetails" EntityType="Self.DepotDetails" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DepotDetails].[DepotAddress] AS [DepotAddress], 
+    [DepotDetails].[DepotCoordinates] AS [DepotCoordinates], 
+    [DepotDetails].[DepotName] AS [DepotName]
+    FROM [dbo].[DepotDetails] AS [DepotDetails]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VehicleRentalDetails" EntityType="Self.VehicleRentalDetails" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VehicleRentalDetails].[RentalStartDate] AS [RentalStartDate], 
+    [VehicleRentalDetails].[RentalEndDate] AS [RentalEndDate], 
+    [VehicleRentalDetails].[VehicleReturnedDate] AS [VehicleReturnedDate], 
+    [VehicleRentalDetails].[Member] AS [Member], 
+    [VehicleRentalDetails].[Vehicle] AS [Vehicle]
+    FROM [dbo].[VehicleRentalDetails] AS [VehicleRentalDetails]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

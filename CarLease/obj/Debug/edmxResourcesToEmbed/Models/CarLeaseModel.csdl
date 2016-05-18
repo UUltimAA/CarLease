@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OYLeasingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberFullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MemberID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="BirthdayDate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="VehicleDetails">
+    <Key>
+      <PropertyRef Name="Vehicle" />
+    </Key>
+    <Property Name="Vehicle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CurrentKMPassed" Type="Int32" Nullable="false" />
+    <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="GoodForRental" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="VehicleRegistrationNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DepotDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DepotDetails">
+    <Key>
+      <PropertyRef Name="DepotAddress" />
+      <PropertyRef Name="DepotCoordinates" />
+      <PropertyRef Name="DepotName" />
+    </Key>
+    <Property Name="DepotAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DepotCoordinates" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DepotName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VehicleRentalDetails">
+    <Key>
+      <PropertyRef Name="RentalStartDate" />
+      <PropertyRef Name="RentalEndDate" />
+      <PropertyRef Name="VehicleReturnedDate" />
+      <PropertyRef Name="Member" />
+      <PropertyRef Name="Vehicle" />
+    </Key>
+    <Property Name="RentalStartDate" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="RentalEndDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="VehicleReturnedDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Member" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Vehicle" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="OYLeasingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Member" EntityType="Self.Member" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="VehicleDetails" EntityType="Self.VehicleDetails" />
+    <EntitySet Name="DepotDetails" EntityType="Self.DepotDetails" />
+    <EntitySet Name="VehicleRentalDetails" EntityType="Self.VehicleRentalDetails" />
+  </EntityContainer>
+</Schema>

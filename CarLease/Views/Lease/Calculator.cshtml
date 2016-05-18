@@ -1,0 +1,92 @@
+@model CarLease.Models.CarDetails
+
+@{
+    ViewBag.Title = "Calculator";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Calculator</h2>
+
+@section additionals{
+    <script src="/Scripts/calculator.js"></script>
+}
+
+<div id="carDetails" class="form-horizontal">
+
+    <div class="form-group">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Car Details</div>
+            <div class="panel-body">
+                <div class="panel-info">Your car, so far</div>
+                <div class="form-group">
+                    <br />
+
+                    <input type="hidden" name="carId" value="@Model.Car.Id" />
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="brand">Brand: </label>
+                            <input name="brand" type="text" placeholder="Brand" value="@(Model.CarType.Brand)" />
+                        </div>
+
+                        <div class="col-lg-4">
+                            <label for="model">Model: </label>
+                            <input name="model" type="text" placeholder="Model" value="@(Model.CarType.Model)" />
+                        </div>
+
+                        <div class="col-lg-4">
+                            <label for="dailyCost">Daily Cost: </label>
+                            <input name="dailyCost" type="text" placeholder="Daily Cost" value="@(Model.CarType.DailyCost)" />
+                        </div>
+                     </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-4">
+                    <label for="dailyLateCost">Daily Penalty Cost: </label>
+                    <input name="dailyLateCost" type="text" placeholder="Daily Penalty Cost" value="@(Model.CarType.DailyLateCost)" />
+</div>
+                        <div class="col-lg-4">
+                    <label for="currentKM">Current KM:</label>
+                    <input name="currentKM" type="text" placeholder="KM done" disabled
+                           value="@(Model.Car.CurrentKM)" />
+                        </div>
+                    <input name="picture" type="image" disabled />
+
+                    <label for="licenseNumber">License Number: </label>
+                    <input name="licenseNumber" type="number" placeholder="License Number" disabled
+                           value="@(Model.Car.LicenseNumber)" />
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class='input-group date' id='datetimepicker1'>
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+        <label for="dateStart" class="col-sm-2 control-label">Lease start day </label>
+        <div class="col-sm-10">
+            <input type="date" class="form-control" name="dateStart" placeholder="Start date">
+        </div>
+        <label for="leaseDays" class="col-sm-2 control-label">Number of days </label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" name="leaseDays" onchange="calculator()" placeholder="enter desired number of days">
+        </div>
+    </div>
+    <!--carDetails.dateStart, carDetails.leaseDays, carDetails.carType-->
+
+
+    <div>
+        <label for="dailyCostResult" class="col-sm-1 control-label">Cost: </label>
+        <input id="dailyCostResult" disabled>
+        <label id="resultErrorLbl" style="color:red; display:none;">Lease days is invalid</label>
+    </div>
+
+    <button type="button" onclick="order()">Order</button>
+</div>
+    </div>
+

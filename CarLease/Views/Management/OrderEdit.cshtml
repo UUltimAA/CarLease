@@ -1,0 +1,92 @@
+@model CarLease.Models.Orders
+
+@{
+    ViewBag.Title = "OrderEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>OrderEdit</h2>
+<form name="orderEdit" method="post" action="/management/OrderEdit">
+
+    <input type="hidden" name="order.Id" value="@Model.Id" />
+
+    <label for=" order.LeaseStartDate">Lease start date</label>
+    <input type="date" name="order.LeaseStartDate" value="@Model.LeaseStartDate" />
+
+    <label for="order.LeaseEndDate">Lease end date</label>
+    <input type="date" name="order.LeaseEndDate" value="@Model.LeaseEndDate" />
+
+    <label for="order.ActualReturnDate">Lease Actual return date</label>
+    <input type="date" name="order.ActualReturnDate" value="@Model.ActualReturnDate" />
+
+    @*<label for="order.CarId">Car:</label>
+    <input type="text" name="CarId" value="" />
+    <input type="hidden" name="order.CarId" value="@Model.CarId" />*@
+
+    <div id="dialog" title="Basic dialog" style="display:none">
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <td>Order ID</td>
+                    <td>Car ID</td>
+                    <td>CarType ID</td>
+                    <td>CurrentKM</td>
+                    <td>Good For Rental</td>
+                    <td>License number</td>
+                    <td>Branch Id</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var car in ViewBag.Cars)
+                {
+              <tr>
+                  <td>@car.Order_Id</td>
+                  <td>@car.Id </td>
+                  <td>@car.CarTypeId</td>
+                  <td>@car.CurrentKM</td>
+                  <td>
+                      @if (car.GoodForRental == "y")
+                      {
+                    <i class="fa fa-check"></i>                          
+                      }
+                  
+                    @*<input type="checkbox" name="Car.GoodForRental" @(car.GoodForRental == "y" ? "checked" : "") />*@
+                  </td>
+                  <td>@car.LicenseNumber</td>
+                  <td>@car.BranchId</td>
+                  <td><a href="/management/orderEdit?orderId=@car.Order_Id" class="btn btn-default">Select</a></td>
+
+              </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+     
+    
+
+    <label for="CustomerId">Customer:</label>
+    <select>
+        @foreach (var customer in ViewBag.Customers as Dictionary<int, string>)
+        {
+            <option value="@customer.Key">@customer.Value</option>
+        }
+        <option value="id">value</option>
+    </select>
+    <!--input type="text" name="CutomerId" /-->
+    <button type="button" class="btn btn-regular" id="CarsBtn" onclick="showCars()" >Show Cars</button>
+
+    <input type="hidden" name="order.CustomerId" value="@Model.CustomerId">
+    <button type="submit">Confirm</button>
+</form>
+
+<script>
+    //$(
+    function showCars() {
+        $("#dialog").dialog({ autoOpen: false, width: 800 });
+        $("#CarsBtn").click(function () {
+            $("#dialog").dialog("open");
+        });
+    }
+
+    ;
+</script>

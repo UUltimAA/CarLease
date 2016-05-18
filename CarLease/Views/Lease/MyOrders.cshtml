@@ -1,0 +1,45 @@
+@model IList<CarLease.Models.OrderDetails>
+
+@{
+    ViewBag.Title = "MyOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Orders</h2>
+
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <td>Order ID</td>
+            <td>Lease start date</td>
+            <td>Lease end date</td>
+            <td>Actual Return Date</td>
+            <td>Brand</td>
+            <td>Daily cost</td>
+            <td>Daily Late Cost</td>
+            <td>Gear</td>
+            <td>License Number</td>
+            <td>Model</td>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CarLease.Models.OrderDetails orderDetails in Model)
+        {
+            <tr>
+                <td>@orderDetails.OrderId</td>
+                <td>@orderDetails.LeaseStartDate</td>
+                <td>@orderDetails.LeaseEndDate</td>
+                <td>@orderDetails.ActualReturnDate</td>
+                <td>@orderDetails.Brand</td>
+                <td>@orderDetails.Dailycost</td>
+                <td>@orderDetails.DailyLateCost</td>
+                <td>@orderDetails.Gear</td>
+                <td>@orderDetails.LicenseNumber</td>
+                <td>@orderDetails.Model</td>
+                <td>@orderDetails.UserName</td>
+
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,79 @@
+@model CarLease.Models.Cars
+
+@{
+    ViewBag.Title = "CarEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CarEdit</h2>
+<form name="carEdit" method="post" action="/management/carEdit">
+
+<div class="row">
+
+    <div class="col-xs-3">
+        <div class="dl-horizontal">
+            <label for="Car.CurrentKM">Current KM</label>
+        </div>
+        <div class="dl-horizontal">
+            <input type="number" name="Car.CurrentKm" value="@Model.CurrentKM">
+        </div>
+    </div>
+
+    <div class="col-xs-3">
+        <div class="dl-horizontal">
+            <label for="Car.GoodForRental">Good For Rental</label>
+        </div>
+        <div class="dl-horizontal">
+            <input type="checkbox" name="Car.GoodForRental" @(Model.GoodForRental == "y" ? "checked" :"")  />
+        </div>
+    </div>
+
+    <div class="col-xs-3">
+        <div class="dl-horizontal">
+            <label for="Car.LicenseNumber">License Number</label>
+        </div>
+        <div class="dl-horizontal">
+            <input type="number" name="Car.LicenseNumber" value="@Model.LicenseNumber">
+        </div>
+    </div>
+
+    <div class="col-xs-3">
+        <div class="dl-horizontal">
+            <input type="number" name="Car.CarTypeId" value="@Model.CarTypeId" />
+        </div>
+        <div class="dl-horizontal">
+            <label for="Car.BranchId">Branch:</label>
+        </div>
+        <div class="dl-horizontal">
+           <input type="text" id="BranchId" name="Car.BranchId" value="@Model.BranchId" />
+           <select id="branchNameId"   onchange="branchit()" >
+               @foreach (var branch in ViewBag.Branches as Dictionary<int, string>)
+               {
+                   try { 
+                   <option value="@branch.Key">@branch.Value</option>
+                   }
+                   catch(Exception ex)
+                   {
+                       
+                   }
+               }
+           </select>
+        </div>
+    </div>
+
+</div>
+
+
+        
+
+    
+
+    <button type="submit" ">Update/Add</button>
+</form>
+
+    <script>
+        function branchit() {
+            var element = document.getElementById("branchNameId").value;
+            document.getElementById("BranchId").value = element;
+        }
+    </script>

@@ -1,0 +1,41 @@
+@model CarLease.Models.Customers
+
+@{
+    ViewBag.Title = "CustomerEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CustomerEdit</h2>
+
+<form name="customerEdit" method="post" action="/management/customeredit">
+
+    <input type="hidden" name="customer.id" value="@Model.Id" />
+
+    <label for="customer.FullName">Full Name</label>
+    <input type="text" name="customer.FullName" value="@Model.FullName" />
+
+    <label for="customer.UserName">Username</label>
+    <input type="text" name="customer.UserName" value="@Model.UserName" />
+
+    <label for="customer.Birthdate">Birth Date</label>
+    <input type="date" name="customer.Birthdate" value="@Model.Birthdate" />
+
+    <label for="customer.Gender">Gender</label>
+    <select name="customer.Gender"> 
+        <option value="M" @(Model.Gender == "M" ? "selected" : "")>Male</option>
+        <option value="F" @(Model.Gender == "F" ? "selected" : "")>Female</option>
+    </select> 
+
+    <label for="customer.Email">Email</label>
+    <input type="email" name="customer.Email" value="@Model.Email" />
+
+    <label for="customer.Password">Password</label>
+    <input type="password" name="customer.Password" value="@Model.Password" />
+
+    <label for="customer.isAdmin">Admin Premissions</label>
+    <input type="checkbox" name="customer.IsAdmin" @(Model.IsAdmin? "checked" : "") value="true"  />
+    @Model.IsAdmin
+
+    <button type="submit">Update/Add</button>
+
+</form>

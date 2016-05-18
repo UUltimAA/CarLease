@@ -1,0 +1,40 @@
+﻿@model IList<CarLease.Models.CarTypes>
+
+@{
+    ViewBag.Title = "CarTypes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CarTypes</h2>
+
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <td>Brand</td>
+            <td>Model</td>
+            <td>Gear</td>
+            <td>Daily cost</td>
+            <td>Daily late cost</td>
+        </tr>
+    </thead>
+    <tbody>
+        <a href="/management/carTypeEdit" class="btn btn-default">Add CarType</a>
+        @foreach (CarLease.Models.CarTypes carType in Model)
+        {
+            <tr>
+                <td>@carType.Brand</td>
+                <td>@carType.Model</td>
+                <td>@carType.Gear</td>
+                <td>@carType.DailyCost</td>
+                <td>@carType.DailyLateCost</td>
+                <td>
+                    <a href="/management/carTypeEdit?cartypeId=@carType.Id" class="btn btn-regular">Modify</a>
+                    <a href="/management/deletecarType?cartypeid=@carType.Id" class="btn btn-regular">Delete</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+

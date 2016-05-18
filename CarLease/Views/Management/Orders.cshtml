@@ -1,0 +1,65 @@
+@model IList<CarLease.Models.OrderDetails>
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section additionals{
+    <script src="/Scripts/orders.js"></script>
+}
+
+<h2>Orders</h2>
+
+@*<form action="/management/orders" method="post">
+    <div class="form-group">
+        <div class="col-sm-12">
+            <span>Order Details:</span>
+            <input type="number" name="customerId" />
+            <input type="number" name="carId" />
+            <input type="date" name="leaseStart" />
+            <input type="date" name="leaseEnd" />
+            <input type="date" name="actualReturnDate" />
+
+            <button type="submit" name="add">Add</button>
+            <button type="submit" name="moddify">Moddify</button>
+            <button type="submit" name="delete">Delete</button>
+
+        </div>
+
+        <div class="col-sm-12">
+            <label for="OrderList">Orders:</label>
+            <select class="form-control" id="orderList">
+                <option></option>
+                script action for extracting a list of orders
+            </select>
+            <button type="button" onclick="getOrders()">Get Orders</button>
+
+        </div>
+    </div>
+</form>*@
+
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <td>Order ID</td>
+            <td>Lease start date</td>
+            <td>Lease end date</td>
+            <td>Manage</td>
+        </tr>
+    </thead>
+    <tbody>
+        <a href="/management/orderedit" class="btn btn-regular">Add Order</a> 
+        @foreach (CarLease.Models.OrderDetails orderDetails in Model) { 
+        <tr>
+            <td>@orderDetails.OrderId</td>
+            <td>@orderDetails.LeaseStartDate</td>
+            <td>@orderDetails.LeaseEndDate</td>
+            <td>
+                <a href="/management/orderedit?orderid=@orderDetails.OrderId" class="btn btn-regular">Modify</a>
+                <a href="/management/deleteorder?orderid=@orderDetails.OrderId" class="btn btn-regular">Delete</a>
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>

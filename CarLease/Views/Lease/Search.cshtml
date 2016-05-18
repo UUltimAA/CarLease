@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section additionals{
+    <script src="/Scripts/search.js"></script>
+}
+
+
+
+<h2>Search</h2>
+
+<form action="/lease/search" method="post">
+    <div>
+        <span>Gear:</span>
+        <select name="gear">
+            <option value="" >Any</option>
+            <option value="M">Manual</option>
+            <option value="A">Automatic</option>
+        </select>
+    </div>
+
+    <div>
+        <span>Brand:</span>
+        <select name="brand">
+            <option value="">Any</option>
+            <option>Mazda</option>
+            <option>BMW</option>
+            <option>Hundai</option>
+        </select>
+    </div>
+
+    <div>
+        <span>Model:</span>
+        <select name="model">
+            <option value="">Any</option>
+            <option>Lantis</option>
+            <option>323</option>
+        </select>
+    </div>
+
+    <div>
+        <span> Free text</span>
+        <input type="text" name="freeText" />
+    </div>
+
+    <div>
+        <span>DateTime</span>
+        <input type="date" name="date"/>
+    </div>
+    
+    <button type="button" onclick="search()">Search</button>
+    
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Brand</td>
+            <td>Model</td>
+            <td>Daily Cost</td>
+            <td>Late Cost</td>
+            <td>Gear</td>
+            <td>Currently at branch</td>
+        </tr>
+    </thead>
+    <tbody id="results" ></tbody>
+</table>
